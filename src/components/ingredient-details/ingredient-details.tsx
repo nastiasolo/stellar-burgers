@@ -7,7 +7,6 @@ import { useParams } from 'react-router-dom';
 import { setSelectedIngredient } from '../../storage/slices/ingredients';
 
 export const IngredientDetails: FC = () => {
-  /** TODO: взять переменную из стора - done! */
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -18,7 +17,6 @@ export const IngredientDetails: FC = () => {
     (state: RootState) => state.ingredients.selectedIngredient
   );
 
-  // const loading = useSelector((state: RootState) => state.ingredients.loading);
   console.log(ingredientData);
 
   useEffect(() => {

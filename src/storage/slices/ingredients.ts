@@ -1,6 +1,6 @@
 import { getIngredientsApi } from '@api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TConstructorIngredient, TIngredient } from '@utils-types';
+import { TIngredient } from '@utils-types';
 
 export const fetchIngredients = createAsyncThunk(
   'ingredients/fetchIngredients',
@@ -29,18 +29,6 @@ const ingredientSlice = createSlice({
     setSelectedIngredient(state, action: PayloadAction<TIngredient | null>) {
       state.selectedIngredient = action.payload;
     }
-    // addToConstructor: {
-    //   reducer: (state, { payload }: PayloadAction<TConstructorIngredient>) => {
-    //     if (payload.type === 'bun') {
-    //       state.bun = payload;
-    //     } else {
-    //       state.ingredients.push(payload);
-    //     }
-    //   },
-    //   prepare: (ingredient: TIngredient) => ({
-    //     payload: { ...ingredient, id: uuid() }
-    //   })
-    // }
   },
   extraReducers: (builder) => {
     builder

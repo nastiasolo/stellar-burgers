@@ -1,7 +1,6 @@
-import { ReactElement, ReactNode } from 'react';
 import { useSelector } from 'react-redux';
-import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import store, { RootState } from '../../services/store';
+import { Navigate, useLocation } from 'react-router-dom';
+
 import { Preloader } from '../ui/preloader';
 import { getIsAuthChecked, getUser } from '../../storage/slices/profile';
 

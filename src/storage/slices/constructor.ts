@@ -25,9 +25,6 @@ const constructorSlice = createSlice({
   name: 'burgerConstructor',
   initialState,
   reducers: {
-    // addBun: (state, action: PayloadAction<TConstructorIngredient>) => {
-    //   state.constructorItems.bun = action.payload;
-    // },
     addIngredient: (state, action: PayloadAction<TConstructorIngredient>) => {
       const ingredient = action.payload;
 
@@ -48,16 +45,17 @@ const constructorSlice = createSlice({
     },
     setOrderModalData: (state, action: PayloadAction<TOrder | null>) => {
       state.orderModalData = action.payload;
-    }
+    },
+    resetConstructor: () => initialState
   }
 });
 
 export const {
-  // addBun,
   addIngredient,
   removeIngredient,
   setOrderRequest,
-  setOrderModalData
+  setOrderModalData,
+  resetConstructor
 } = constructorSlice.actions;
 
 export default constructorSlice.reducer;

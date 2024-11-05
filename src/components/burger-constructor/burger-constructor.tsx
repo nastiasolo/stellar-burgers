@@ -1,19 +1,19 @@
 import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../services/store';
-import { TBurgerConstructorItems } from '../../storage/slices/constructor';
+import {
+  resetConstructor,
+  setOrderModalData,
+  setOrderRequest,
+  TBurgerConstructorItems
+} from '../../storage/slices/constructor';
 import { useNavigate } from 'react-router-dom';
+import { orderBurgerApi } from '@api';
 
 export const BurgerConstructor: FC = () => {
-  /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
-  // const constructorItems = {
-  //   bun: {
-  //     price: 0
-  //   },
-  //   ingredients: []
-  // };
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const constructorStoreItems = useSelector(
@@ -37,14 +37,32 @@ export const BurgerConstructor: FC = () => {
 
   const user = useSelector((state: RootState) => state.user.user);
 
-  const onOrderClick = () => {
+  const onOrderClick = async () => {
     if (!constructorItems.bun || orderRequest) return;
     if (!user) {
-      navigate('/login');
+      navigate('/login', { replace: true });
       return;
     }
+    const ingredientIDs = [
+      constructorItems.bun._id,
+      ...constructorItems.ingredients.map((item) => item._id),
+      constructorItems.bun._id
+    ];
+    dispatch(setOrderRequest(true));
+
+    try {
+      const response = await orderBurgerApi(ingredientIDs);
+      dispatch(setOrderModalData(response.order));
+    } catch (error) {
+      console.error('Ошибка при оформлении заказа', error);
+    } finally {
+      dispatch(setOrderRequest(false));
+    }
   };
-  const closeOrderModal = () => {};
+  const closeOrderModal = () => {
+    dispatch(resetConstructor());
+    navigate('/feed');
+  };
 
   const price = useMemo(
     () =>

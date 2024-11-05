@@ -1,14 +1,6 @@
 import '../../index.css';
 import styles from './app.module.css';
-import {
-  createRoutesFromElements,
-  createBrowserRouter,
-  Route,
-  Routes,
-  RouterProvider,
-  useLocation,
-  useNavigate
-} from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import {
   ConstructorPage,
   Feed,
@@ -30,18 +22,17 @@ import { OnlyAuth, OnlyUnAuth } from '../protected-route';
 
 const App = () => {
   const location = useLocation();
-  const state = location.state as { backgroundLocation?: Location };
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const background = location.state?.background;
 
   useEffect(() => {
     dispatch(fetchIngredients());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     dispatch(authCheck());
-  }, [dispatch]);
+  }, []);
 
   return (
     <div className={styles.app}>
@@ -82,7 +73,7 @@ const App = () => {
           <Route
             path='/feed/:number'
             element={
-              <Modal title='Order Info' onClose={() => navigate(-1)}>
+              <Modal title='Детали заказа' onClose={() => navigate('/feed')}>
                 <OrderInfo />
               </Modal>
             }
@@ -90,7 +81,7 @@ const App = () => {
           <Route
             path='/ingredients/:id'
             element={
-              <Modal title='Детали ингредиента' onClose={() => navigate(-1)}>
+              <Modal title='Детали ингредиента' onClose={() => navigate('/')}>
                 <IngredientDetails />
               </Modal>
             }
@@ -98,7 +89,10 @@ const App = () => {
           <Route
             path='/profile/orders/:number'
             element={
-              <Modal title='Order Info' onClose={() => navigate(-1)}>
+              <Modal
+                title='Детали заказа'
+                onClose={() => navigate('/profile/orders')}
+              >
                 <OrderInfo />
               </Modal>
             }

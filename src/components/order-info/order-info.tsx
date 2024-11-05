@@ -7,17 +7,6 @@ import { RootState } from '../../services/store';
 import { useParams } from 'react-router-dom';
 
 export const OrderInfo: FC = () => {
-  /** TODO: взять переменные orderData и ingredients из стора */
-  // const orderData = {
-  //   createdAt: '',
-  //   ingredients: [],
-  //   _id: '',
-  //   status: '',
-  //   name: '',
-  //   updatedAt: 'string',
-  //   number: 0
-  // };
-
   const { number } = useParams();
   const orderData = useSelector((state: RootState) =>
     state.feed.orders.find((order) => order.number === Number(number))

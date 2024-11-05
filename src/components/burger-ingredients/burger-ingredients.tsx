@@ -8,8 +8,6 @@ import { AppDispatch, RootState } from '../../services/store';
 import { fetchIngredients } from '../../storage/slices/ingredients';
 
 export const BurgerIngredients: FC = () => {
-  /** TODO: взять переменные из стора */
-
   const { ingredients } = useSelector((state: RootState) => state.ingredients);
   console.log(ingredients, 'ингредиенты в бургер-ингредиентс');
   const buns = ingredients.filter((ingredient) => ingredient.type === 'bun');

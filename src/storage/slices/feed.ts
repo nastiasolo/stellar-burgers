@@ -1,28 +1,38 @@
-import { getFeedsApi } from '@api';
+import { getFeedsApi, getOrdersApi } from '@api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { act } from '@testing-library/react';
+
 import { TOrder } from '@utils-types';
 
 type TFeedState = {
   orders: TOrder[];
   selectedOrder: TOrder | null;
+  profileOrders: TOrder[];
   total: number;
   totalToday: number;
   isLoading: boolean;
-  error: string | null;
+  error: string | undefined;
 };
 
 const initialState: TFeedState = {
   orders: [],
   selectedOrder: null,
+  profileOrders: [],
   total: 0,
   totalToday: 0,
   isLoading: false,
-  error: null
+  error: ''
 };
 
 export const fetchFeed = createAsyncThunk('feed/fetchFeed', async () =>
   getFeedsApi()
+);
+
+export const fetchUserOrders = createAsyncThunk(
+  'userOrders/fetchUserOrders',
+  async () => {
+    const orders = await getOrdersApi();
+    return orders;
+  }
 );
 
 const feedSlice = createSlice({
@@ -38,7 +48,7 @@ const feedSlice = createSlice({
     builder
       .addCase(fetchFeed.pending, (state) => {
         state.isLoading = true;
-        state.error = null;
+        state.error = '';
       })
       .addCase(fetchFeed.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -48,8 +58,24 @@ const feedSlice = createSlice({
       })
       .addCase(fetchFeed.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload as string;
+        state.error = action.error.message;
       });
+    builder
+      .addCase(fetchUserOrders.pending, (state) => {
+        state.isLoading = true;
+        state.error = '';
+      })
+      .addCase(fetchUserOrders.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.profileOrders = action.payload;
+      })
+      .addCase(fetchUserOrders.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
+      });
+  },
+  selectors: {
+    profileOrdersSelector: (state) => state.profileOrders
   }
 });
 

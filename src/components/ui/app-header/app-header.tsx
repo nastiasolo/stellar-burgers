@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import styles from './app-header.module.css';
 import { TAppHeaderUIProps } from './type';
 import {
@@ -42,10 +42,17 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
         <Logo className='' />
       </div>
       <div className={styles.link_position_last}>
-        <ProfileIcon type={'primary'} />
-        <p className='text text_type_main-default ml-2'>
-          {userName || 'Личный кабинет'}
-        </p>
+        <NavLink
+          to='/profile'
+          className={({ isActive }) =>
+            `${styles.link} ml-10 ${isActive ? styles.link_active : ''}`
+          }
+        >
+          <ProfileIcon type={'primary'} />
+          <p className='text text_type_main-default ml-2'>
+            {userName || 'Личный кабинет'}
+          </p>
+        </NavLink>
       </div>
     </nav>
   </header>
