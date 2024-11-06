@@ -4,7 +4,7 @@ import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchIngredients } from '../../storage/slices/ingredients';
 import { AppDispatch, RootState } from '../../services/store';
-import { fetchUserOrders } from '../../storage/slices/userOrders';
+import { fetchUserOrders } from '../../storage/slices/feed';
 
 export const ProfileOrders: FC = () => {
   /** TODO: взять переменную из стора */
