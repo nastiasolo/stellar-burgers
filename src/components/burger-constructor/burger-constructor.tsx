@@ -2,7 +2,7 @@ import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../services/store';
+import { AppDispatch, RootState } from '../../services/store';
 import {
   resetConstructor,
   setOrderModalData,
@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { orderBurgerApi } from '@api';
 
 export const BurgerConstructor: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   const constructorStoreItems = useSelector(

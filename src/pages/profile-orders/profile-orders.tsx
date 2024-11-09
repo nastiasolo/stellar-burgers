@@ -7,16 +7,12 @@ import { AppDispatch, RootState } from '../../services/store';
 import { fetchUserOrders } from '../../storage/slices/feed';
 
 export const ProfileOrders: FC = () => {
-  /** TODO: взять переменную из стора */
-  // const orders: TOrder[] = [];
   const dispatch = useDispatch<AppDispatch>();
 
   const orders = useSelector((state: RootState) => state.feed.profileOrders);
   const ingredients = useSelector(
     (state: RootState) => state.ingredients.ingredients
   );
-
-  console.log(orders);
 
   useEffect(() => {
     if (!ingredients.length) {

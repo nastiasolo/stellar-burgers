@@ -7,11 +7,12 @@ import { useDispatch } from 'react-redux';
 import { setSelectedIngredient } from '../../storage/slices/ingredients';
 import { addIngredient } from '../../storage/slices/constructor';
 import { v4 as uuid } from 'uuid';
+import { AppDispatch } from 'src/services/store';
 
 export const BurgerIngredient: FC<TBurgerIngredientProps> = memo(
   ({ ingredient, count }) => {
     const location = useLocation();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     const handleAdd = () => {
       const constructorIngredient = { ...ingredient, id: uuid() };

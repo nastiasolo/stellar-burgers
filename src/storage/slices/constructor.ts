@@ -34,11 +34,8 @@ const constructorSlice = createSlice({
         state.constructorItems.ingredients.push(ingredient);
       }
     },
-    removeIngredient: (state, action: PayloadAction<string>) => {
-      state.constructorItems.ingredients =
-        state.constructorItems.ingredients.filter(
-          (ingredient) => ingredient.id !== action.payload
-        );
+    removeIngredient: (state, action: PayloadAction<number>) => {
+      state.constructorItems.ingredients.splice(action.payload, 1);
     },
     setOrderRequest: (state, action: PayloadAction<boolean>) => {
       state.orderRequest = action.payload;

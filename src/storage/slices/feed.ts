@@ -1,4 +1,4 @@
-import { getFeedsApi, getOrdersApi } from '@api';
+import { getFeedsApi, getOrderByNumberApi, getOrdersApi } from '@api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { TOrder } from '@utils-types';
@@ -35,14 +35,22 @@ export const fetchUserOrders = createAsyncThunk(
   }
 );
 
+export const fetchOrderByNumber = createAsyncThunk(
+  'feed/fetchOrderByNumber',
+  async (number: number) => {
+    const response = await getOrderByNumberApi(number);
+    return response.orders[0];
+  }
+);
+
 const feedSlice = createSlice({
   name: 'feed',
   initialState,
   reducers: {
-    setSelectedOrder: (state, action: PayloadAction<string>) => {
-      const order = state.orders.find((order) => order._id === action.payload);
-      state.selectedOrder = order || null;
-    }
+    // setSelectedOrder: (state, action: PayloadAction<string>) => {
+    //   const order = state.orders.find((order) => order._id === action.payload);
+    //   state.selectedOrder = order || null;
+    // }
   },
   extraReducers: (builder) => {
     builder
@@ -73,6 +81,19 @@ const feedSlice = createSlice({
         state.isLoading = false;
         state.error = action.error.message;
       });
+    builder
+      .addCase(fetchOrderByNumber.pending, (state) => {
+        state.isLoading = true;
+        state.error = '';
+      })
+      .addCase(fetchOrderByNumber.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.selectedOrder = action.payload;
+      })
+      .addCase(fetchOrderByNumber.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
+      });
   },
   selectors: {
     profileOrdersSelector: (state) => state.profileOrders
@@ -81,4 +102,4 @@ const feedSlice = createSlice({
 
 export default feedSlice.reducer;
 export const feedActions = feedSlice.actions;
-export const { setSelectedOrder } = feedSlice.actions;
+// export const { setSelectedOrder } = feedSlice.actions;

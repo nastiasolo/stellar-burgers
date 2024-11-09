@@ -8,7 +8,7 @@ export const Profile: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const user = useSelector((state: RootState) => state.user.user);
-  console.log(user, 'user');
+
   const [formValue, setFormValue] = useState({
     name: user?.name || '',
     email: user?.email || '',

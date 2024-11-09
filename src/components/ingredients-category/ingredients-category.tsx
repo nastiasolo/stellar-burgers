@@ -23,8 +23,7 @@ export const IngredientsCategory = forwardRef<
 
   const ingredientsCounters = useMemo(() => {
     const { bun, ingredients } = constructorItems;
-    console.log(bun, 'булка');
-    console.log(ingredients, 'остальные ингредиенты');
+
     const counters: { [key: string]: number } = {};
     ingredients.forEach((ingredient: TIngredient) => {
       if (!counters[ingredient._id]) counters[ingredient._id] = 0;

@@ -43,7 +43,6 @@ export const fetchWithRefresh = async <T>(
     const res = await fetch(url, options);
     return await checkResponse<T>(res);
   } catch (err) {
-    console.log('Ошибка в fetchWithRefresh', err);
     if ((err as { message: string }).message === 'jwt expired') {
       const refreshData = await refreshToken();
       if (options.headers) {

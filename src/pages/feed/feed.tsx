@@ -8,11 +8,9 @@ import { fetchFeed } from '../../storage/slices/feed';
 
 export const Feed: FC = () => {
   /** TODO: взять переменную из стора */
-  // const orders: TOrder[] = [];
 
   const dispatch = useDispatch<AppDispatch>();
   const orders = useSelector((state: RootState) => state.feed.orders);
-  console.log(orders, 'feed');
 
   const handleGetFeeds = useCallback(() => {
     dispatch(fetchFeed());

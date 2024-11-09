@@ -9,16 +9,11 @@ import { fetchIngredients } from '../../storage/slices/ingredients';
 
 export const BurgerIngredients: FC = () => {
   const { ingredients } = useSelector((state: RootState) => state.ingredients);
-  console.log(ingredients, 'ингредиенты в бургер-ингредиентс');
   const buns = ingredients.filter((ingredient) => ingredient.type === 'bun');
   const mains = ingredients.filter((ingredient) => ingredient.type === 'main');
   const sauces = ingredients.filter(
     (ingredient) => ingredient.type === 'sauce'
   );
-
-  console.log('Buns:', buns);
-  console.log('Mains:', mains);
-  console.log('Sauces:', sauces);
 
   const [currentTab, setCurrentTab] = useState<TTabMode>('bun');
   const titleBunRef = useRef<HTMLHeadingElement>(null);

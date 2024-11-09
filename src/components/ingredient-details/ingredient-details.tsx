@@ -2,13 +2,13 @@ import { FC, useEffect } from 'react';
 import { Preloader } from '../ui/preloader';
 import { IngredientDetailsUI } from '../ui/ingredient-details';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../services/store';
+import { AppDispatch, RootState } from '../../services/store';
 import { useParams } from 'react-router-dom';
 import { setSelectedIngredient } from '../../storage/slices/ingredients';
 
 export const IngredientDetails: FC = () => {
   const { id } = useParams();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const ingredients = useSelector(
     (state: RootState) => state.ingredients.ingredients
@@ -16,8 +16,6 @@ export const IngredientDetails: FC = () => {
   const ingredientData = useSelector(
     (state: RootState) => state.ingredients.selectedIngredient
   );
-
-  console.log(ingredientData);
 
   useEffect(() => {
     const selectedIngredient = ingredients.find(

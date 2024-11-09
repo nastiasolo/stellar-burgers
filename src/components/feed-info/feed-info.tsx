@@ -15,9 +15,6 @@ export const FeedInfo: FC = () => {
   const orders = useSelector((state: RootState) => state.feed.orders);
   const feed = useSelector((state: RootState) => state.feed);
 
-  console.log(orders, 'feed-info, orders');
-  console.log(feed, 'feed-info, feed');
-
   const readyOrders = getOrders(orders, 'done');
 
   const pendingOrders = getOrders(orders, 'pending');

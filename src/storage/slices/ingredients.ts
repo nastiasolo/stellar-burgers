@@ -8,7 +8,6 @@ export const fetchIngredients = createAsyncThunk(
 );
 
 type TIngredientsState = {
-  [x: string]: any;
   ingredients: TIngredient[];
   selectedIngredient: TIngredient | null;
   loading: boolean;
@@ -43,7 +42,6 @@ const ingredientSlice = createSlice({
       .addCase(fetchIngredients.fulfilled, (state, action) => {
         state.loading = false;
         state.ingredients = action.payload;
-        console.log('Ingredients state:', action.payload);
       });
   }
 });
