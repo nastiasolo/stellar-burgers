@@ -11,7 +11,7 @@ import constructorSlice from '../storage/slices/constructor';
 import feedSlice from '../storage/slices/feed';
 import userSlice from '../storage/slices/profile';
 
-const rootReducer = {
+export const rootReducer = {
   ingredients: ingredientSlice,
   burgerConstructor: constructorSlice,
   feed: feedSlice,
