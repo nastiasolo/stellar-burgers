@@ -61,7 +61,17 @@ const App = () => {
         <Route path='*' element={<NotFound404 />} />
 
         <Route path='/feed/:number' element={<OrderInfo />} />
-        <Route path='/ingredients/:id' element={<IngredientDetails />} />
+        <Route
+          path='/ingredients/:id'
+          element={
+            <div className={styles.detailPageWrap}>
+              <p className={'text text_type_main-large ${styles.detailHeader}'}>
+                Детали ингредиента
+              </p>
+              <IngredientDetails />
+            </div>
+          }
+        />
         <Route
           path='/profile/orders/:number'
           element={<OnlyAuth component={<OrderInfo />} />}
@@ -73,7 +83,7 @@ const App = () => {
           <Route
             path='/feed/:number'
             element={
-              <Modal title='Детали заказа' onClose={() => navigate('/feed')}>
+              <Modal title='' onClose={() => navigate('/feed')}>
                 <OrderInfo />
               </Modal>
             }
@@ -90,7 +100,7 @@ const App = () => {
             path='/profile/orders/:number'
             element={
               <Modal
-                title='Детали заказа'
+                title={OrderInfo.name}
                 onClose={() => navigate('/profile/orders')}
               >
                 <OrderInfo />

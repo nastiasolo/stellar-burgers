@@ -29,7 +29,8 @@ export const OrderInfo: FC = () => {
 
   useEffect(() => {
     if (selectedOrder) {
-      setOrderData(selectedOrder);
+      console.log('selectedOrder', selectedOrder);
+      setOrderData({ ...selectedOrder });
     }
   }, [selectedOrder]);
 
@@ -67,6 +68,8 @@ export const OrderInfo: FC = () => {
       0
     );
 
+    console.log(orderData, 'orderData');
+
     return {
       ...orderData,
       ingredientsInfo,
@@ -79,5 +82,7 @@ export const OrderInfo: FC = () => {
     return <Preloader />;
   }
 
+  console.log(orderInfo);
+  console.log(orderInfo.status, orderInfo.name);
   return <OrderInfoUI orderInfo={orderInfo} />;
 };
