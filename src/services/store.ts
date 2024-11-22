@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import {
   TypedUseSelectorHook,
@@ -11,12 +11,12 @@ import constructorSlice from '../storage/slices/constructor';
 import feedSlice from '../storage/slices/feed';
 import userSlice from '../storage/slices/profile';
 
-export const rootReducer = {
+export const rootReducer = combineReducers({
   ingredients: ingredientSlice,
   burgerConstructor: constructorSlice,
   feed: feedSlice,
   user: userSlice
-};
+});
 
 const store = configureStore({
   reducer: rootReducer,

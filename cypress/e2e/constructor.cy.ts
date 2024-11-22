@@ -7,6 +7,8 @@ describe('add ingredients works correctly', function () {
   });
 
   it('should add bun', function () {
+    cy.get('[data-cy=constructor-bun-1]').should('not.exist');
+
     cy.get('[data-cy=bun-ingredients]').contains('Добавить').click();
     cy.get('[data-cy=constructor-bun-1]')
       .contains('Ингредиент 1')
@@ -17,6 +19,13 @@ describe('add ingredients works correctly', function () {
   });
 
   it('should add ingredient', function () {
+    cy.get('[data-cy=constructor-ingredients]')
+      .contains('Ингредиент 2')
+      .should('not.exist');
+    cy.get('[data-cy=constructor-ingredients]')
+      .contains('Ингредиент 4')
+      .should('not.exist');
+
     cy.get('[data-cy=mains-ingredients]').contains('Добавить').click();
     cy.get('[data-cy=sauces-ingredients]').contains('Добавить').click();
     cy.get('[data-cy=constructor-ingredients]')
@@ -98,7 +107,5 @@ describe('order modal works correctrly', function () {
 
     cy.get('#modals button[aria-label="Закрыть"]').click();
     cy.get('[data-cy=order-number]').should('not.exist');
-
-    cy.get('[data-cy=bun-ingredients]').should('not.exist');
   });
 });
