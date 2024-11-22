@@ -19,7 +19,7 @@ export const Login: FC = () => {
     const loginData: TLoginData = { email, password };
     const login = await dispatch(loginUser(loginData)).unwrap();
     dispatch(setUser(login.user));
-    navigate('/profile');
+    navigate('/');
   };
 
   return (

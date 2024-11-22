@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { TOrder } from '@utils-types';
 
-type TFeedState = {
+export type TFeedState = {
   orders: TOrder[];
   selectedOrder: TOrder | null;
   profileOrders: TOrder[];
@@ -13,7 +13,7 @@ type TFeedState = {
   error: string | undefined;
 };
 
-const initialState: TFeedState = {
+export const initialState: TFeedState = {
   orders: [],
   selectedOrder: null,
   profileOrders: [],
@@ -46,12 +46,7 @@ export const fetchOrderByNumber = createAsyncThunk(
 const feedSlice = createSlice({
   name: 'feed',
   initialState,
-  reducers: {
-    // setSelectedOrder: (state, action: PayloadAction<string>) => {
-    //   const order = state.orders.find((order) => order._id === action.payload);
-    //   state.selectedOrder = order || null;
-    // }
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchFeed.pending, (state) => {
@@ -102,4 +97,3 @@ const feedSlice = createSlice({
 
 export default feedSlice.reducer;
 export const feedActions = feedSlice.actions;
-// export const { setSelectedOrder } = feedSlice.actions;

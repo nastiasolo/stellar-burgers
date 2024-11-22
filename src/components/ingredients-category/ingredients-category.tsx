@@ -9,13 +9,7 @@ import { RouterInit } from '@remix-run/router';
 export const IngredientsCategory = forwardRef<
   HTMLUListElement,
   TIngredientsCategoryProps
->(({ title, titleRef, ingredients }, ref) => {
-  /** TODO: взять переменную из стора */
-  // const burgerConstructor = {
-  //   bun: {
-  //     _id: ''
-  //   },
-  //   ingredients: []
+>(({ title, titleRef, ingredients, ...rest }, ref) => {
   const constructorItems = useSelector(
     (state: RootState) => state.burgerConstructor.constructorItems
   );
@@ -40,6 +34,7 @@ export const IngredientsCategory = forwardRef<
       ingredients={ingredients}
       ingredientsCounters={ingredientsCounters}
       ref={ref}
+      {...rest}
     />
   );
 });
